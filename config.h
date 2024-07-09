@@ -1,6 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
-#include "/home/crispi/suckless/dwm/themes/catppuccin.h"
+#include "/home/crispi/suckless/dwm/themes/greenie.h"
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -14,12 +14,14 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10" };
 static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10";
-static const unsigned int baralpha = 100;
-static const unsigned int borderalpha = 100;
+static const unsigned int baralpha = 0xB8;
+static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_gray5  },
+	[SchemeUrg]  = { col_gray4, col_cyan,  col_urgborder  },
+
 };
 static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
@@ -28,16 +30,17 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "󰙯", "", };
+static const char *tags[] = { "", "", "󰈹", "", "󰙯", "", };
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            0,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class		  instance    title       tags mask	isfloating   monitor */
+	//{ "org.mozilla.firefox",  NULL,       NULL,       1 << 2,       0,           -1 },
+	//{ "kitty",		    NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Gimp",		    NULL,       NULL,       0,            0,           -1 },
 };
 
 /* layout(s) */
@@ -51,6 +54,7 @@ static const int attachbelow = 1;    /* 1 means attach after the currently activ
 #include "vanitygaps.c"
 
 static const Layout layouts[] = {
+	/* Only title, Monocle, Spiral, and Float are assigned */
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "[M]",      monocle },
