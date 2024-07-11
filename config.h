@@ -1,6 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
-#include "/home/crispi/suckless/dwm/themes/tokyo-night.h"
+#include "/home/crispi/suckless/dwm/themes/catppuccin.h"
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
