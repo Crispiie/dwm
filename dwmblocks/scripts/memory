@@ -1,0 +1,10 @@
+#!/bin/bash
+
+    total_memory=$(free -m | awk 'NR==2{print $2}')
+    used_memory=$(free -m | awk 'NR==2{print $3}')
+
+    # Calculate used memory as a percentage
+    used_percent=$((used_memory * 100 / total_memory))
+
+    # Display used memory percentage
+    echo -n "󰍛 $used_percent%"
