@@ -81,9 +81,12 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = {"kitty",NULL };
-static const char *upvol[]   				= { "amixer", "set", "Master", "5%+",     NULL };
-static const char *downvol[] 				= { "amixer", "set", "Master", "5%-",     NULL };
-static const char *mutevol[] 				= { "amixer", "set", "Master", "toggle", NULL };
+static const char *upvol[]    = { "sh", "-c", "amixer set Master 5%+ && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *downvol[]  = { "sh", "-c", "amixer set Master 5%- && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *mutevol[]  = { "sh", "-c", "amixer set Master toggle && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *upupvol[]    = { "sh", "-c", "amixer set Master 15%+ && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *downdownvol[]  = { "sh", "-c", "amixer set Master 15%- && pkill -RTMIN+10 dwmblocks", NULL };
+
 
 #include "X11/XF86keysym.h"
 #include "movestack.c"
@@ -144,6 +147,8 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
 	{ MODKEY, XF86XK_AudioRaiseVolume, spawn, {.v = upvol } },
 	{ MODKEY, XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+	{ MODKEY|ShiftMask, XF86XK_AudioRaiseVolume, spawn, {.v = upupvol } },
+	{ MODKEY|ShiftMask, XF86XK_AudioLowerVolume, spawn, {.v = downdownvol } },
 	{ MODKEY, XF86XK_AudioMute, spawn, {.v = mutevol } },
 	{ 0,                       XK_Print,       spawn,          SHCMD("maim -s ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').jpg") },
 };
