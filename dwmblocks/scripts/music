@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Fetch the current status of the player (playing/paused/stopped)
+status=$(playerctl status 2>/dev/null)
+
+if [ "$status" = "Playing" ]; then
+    echo " $(playerctl metadata artist) - $(playerctl metadata title)"
+elif [ "$status" = "Paused" ]; then
+    echo " $(playerctl metadata artist) - $(playerctl metadata title)"
+fi

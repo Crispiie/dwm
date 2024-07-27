@@ -1,14 +1,22 @@
 #!/bin/bash
-    batt=$(cat /sys/class/power_supply/BAT0/capacity)
-    
-    if [ "$batt" -le 25 ]; then
-        echo -e "  $batt%"
-    elif [ "$batt" -gt 25 ] && [ "$batt" -lt 50 ]; then
-        echo -e "  $batt%"
-    elif [ "$batt" -ge 50 ] && [ "$batt" -le 75 ]; then
-        echo -e "  $batt%"
-    elif [ "$batt" -gt 75 ] && [ "$batt" -lt 100 ]; then
-        echo -e "  $batt%"
-    elif [ "$batt" -eq 100 ]; then
-        echo -e "  $batt%"
-    fi
+
+batt=$(cat /sys/class/power_supply/BAT0/capacity)
+status=$(cat /sys/class/power_supply/BAT0/status)
+
+# Battery icons array
+battery_icons=("" "" "" "" "")
+
+charging_icon=""
+if [ "$status" = "Charging" ]; then
+    charging_icon=" "  # This is a lightning bolt symbol with a preceding space
+fi
+
+# Determine index for battery icon array
+index=$((batt / 25))
+if [ "$index" -gt 4 ]; then
+    index=4
+fi
+
+icon="${battery_icons[$index]}"
+
+echo -e "$icon  $batt%$charging_icon"

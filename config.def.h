@@ -80,19 +80,18 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static char *roficmd[] = {"rofi", "-show", "drun", NULL};
 static const char *termcmd[]  = {"kitty",NULL };
-static const char *upvol[]    = { "sh", "-c", "amixer set Master 5%+ && pkill -RTMIN+10 dwmblocks", NULL };
-static const char *downvol[]  = { "sh", "-c", "amixer set Master 5%- && pkill -RTMIN+10 dwmblocks", NULL };
-static const char *mutevol[]  = { "sh", "-c", "amixer set Master toggle && pkill -RTMIN+10 dwmblocks", NULL };
-static const char *upupvol[]    = { "sh", "-c", "amixer set Master 15%+ && pkill -RTMIN+10 dwmblocks", NULL };
-static const char *downdownvol[]  = { "sh", "-c", "amixer set Master 15%- && pkill -RTMIN+10 dwmblocks", NULL };
-
-
+static const char *upvol[]    = { "sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *downvol[]  = { "sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *mutevol[]  = { "sh", "-c", "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *upupvol[]    = { "sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%+ && pkill -RTMIN+10 dwmblocks", NULL };
+static const char *downdownvol[]  = { "sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%- && pkill -RTMIN+10 dwmblocks", NULL };
 #include "X11/XF86keysym.h"
 #include "movestack.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },

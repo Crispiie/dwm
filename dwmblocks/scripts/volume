@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
  case $BLOCK_BUTTON in
 	1) setsid -w -f "$TERMINAL" -e pulsemixer; pkill -RTMIN+10 "${STATUSBAR:-dwmblocks}" ;;
 	2) wpctl set-mute @DEFAULT_SINK@ toggle ;;
